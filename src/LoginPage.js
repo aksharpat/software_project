@@ -10,14 +10,15 @@ const LoginPage = ({ onLogin }) => {
     const handleLogin = () => {
         // Read the user data from JSON file using api.js
         const users = getUsers();
-        console.log(users);
+        //console.log(users);
         // Check if credentials are valid
         const isValid = users.some(user => user.username === username && user.password === password);
-
+        const userValue = users.find(user => user.username === username && user.password === password);
+        console.log(userValue)
         if (isValid) {
             // Call onLogin when login is successful
             console.log('logged in');
-            onLogin();
+            onLogin(userValue);
             navigate('/home');
         } else {
             alert('Invalid credentials. Please try again.');
