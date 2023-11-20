@@ -7,7 +7,7 @@ function BrowseTicketsPage() {
         <div className='browse-tickets-class'>
             <h1>Ticket Page</h1>
             <Link to='/home'>
-                <button>Go Home</button>
+                <button>Go Back</button>
             </Link>
         </div>
     );
