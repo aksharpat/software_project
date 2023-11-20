@@ -1,20 +1,31 @@
+// RegistrationPage.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { addUser, getUsers } from './api';
+//import { writeCredentials } from './api'; // Import the writeCredentials function
+import { useNavigate } from 'react-router-dom';
+
 
 const RegistrationPage = () => {
+    const [name, setName] = useState('');
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
+    const [homeAddress, setHomeAddress] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleRegister = () => {
-        // Perform registration logic here
-        // You might want to validate the form fields, check for unique usernames or emails, etc.
+        const emailExists = getUsers().some(user => user.username === username);
 
-        // For this example, let's just log the registration information
-        console.log('Registration data:', { username, email, password });
+        if (emailExists) {
+            alert('Email already exists. Please use a different email.');
+        } else {
+            const newUser = { name, username, homeAddress, phoneNumber, password };
+            addUser(newUser);
 
-        // You can add more sophisticated registration logic here, like making an API request to register the user
+            console.log('Registration successful');
+            navigate('/')
+            // You can add further logic, such as redirecting the user to the login page
+        }
     };
 
     return (
@@ -22,13 +33,23 @@ const RegistrationPage = () => {
             <h1>Registration Page</h1>
             <form>
                 <label>
-                    Username:
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                    Name:
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                 </label>
                 <br />
                 <label>
                     Email:
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} />
+                </label>
+                <br />
+                <label>
+                    Home Address:
+                    <input type="text" value={homeAddress} onChange={(e) => setHomeAddress(e.target.value)} />
+                </label>
+                <br />
+                <label>
+                    Phone Number:
+                    <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                 </label>
                 <br />
                 <label>
@@ -36,15 +57,7 @@ const RegistrationPage = () => {
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </label>
                 <br />
-                <label>
-                    Confirm Password:
-                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                </label>
-                <br />
                 <button type="button" onClick={handleRegister}>Register</button>
-                <Link to="/">
-                    <button type='button'>Go to Login</button>
-                </Link>
             </form>
         </div>
     );

@@ -11,6 +11,9 @@ function App() {
   function logged_in() {
     setLoggedIn(true);
   }
+  function logged_out() {
+    setLoggedIn(false);
+  }
 
   return (
     <Router>
@@ -18,7 +21,7 @@ function App() {
         <nav>
           <ul>
             {loggedIn && <li><Link to="/home">Home</Link></li>}
-            {loggedIn && <li><Link to="/" >Log Out</Link></li>}
+            {loggedIn && <li><Link to="/" onClick={logged_out}>Log Out</Link></li>}
           </ul>
         </nav>
         <Routes>
