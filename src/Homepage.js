@@ -1,15 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function Homepage(){
-    const history = useNavigate();
-    const navigateToBrowseTickets = () => history.push('/browse-tickets');
+
+const Homepage = () => {
+
     return (
-        <div>
+        <div className='homepage-class'>
             <h1>Welcome to The Lottery Website</h1>
-            <button onClick={navigateToBrowseTickets}>Go to Browse Tickets</button>
+            <Link to='/browse-tickets'>
+                <button>Go to Tickets</button>
+            </Link>
+
         </div>
     );
-}
+};
 
 export default Homepage;

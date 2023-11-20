@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function BrowseTicketsPage(){
+
+function BrowseTicketsPage() {
     return (
-        <div>
-            <h1>
-                Ticket Page
-            </h1>
+        <div className='browse-tickets-class'>
+            <h1>Ticket Page</h1>
+            <Link to='/home'>
+                <button>Go Home</button>
+            </Link>
         </div>
     );
 }

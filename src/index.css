@@ -5,9 +5,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: radial-gradient(rgb(144, 144, 144), rgb(150, 150, 150));
+  background-size: cover;
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1 {
+  color: rgb(202, 87, 87);
+  text-shadow: 2px 2px 2px #000;
+  text-align: center;
+}
+
+.homepage-class {
+  text-align: center;
+}
+
+.browse-tickets-class {
+  text-align: center;
+}
+
+.login-page {
+  text-align: center;
 }

@@ -1,28 +1,33 @@
-// import logo from './logo.svg';
-import './App.css';
-import React from 'react';
-import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
-import BrowseTicketsPage from "./BrowseTicketsPage";
-import Homepage from "./Homepage";
-import ReactDOM from "react-dom/client";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Link, Routes, Navigate } from 'react-router-dom';
+import Homepage from './Homepage';
+import LoginPage from './LoginPage';
+import BrowseTicketsPage from './BrowseTicketsPage';
 
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  function logged_in() {
+    setLoggedIn(true)
+  }
+
   return (
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/browse-tickets">Browse Lottery Tickets</Link></li>
-            </ul>
-          </nav>
-          <Routes>
-            <Route path="/" exact component={Homepage}/>
-            <Route path="/browse-tickets" component={BrowseTicketsPage}/>
-          </Routes>
-        </div>
-      </Router>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            {loggedIn && <li><Link to="/home">Home</Link></li>}
+            {!loggedIn && <li><Link to="/login">Login</Link></li>}
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/home" element={loggedIn ? <Homepage /> : <Navigate to="/login" />} />
+          <Route path="/login" element={<LoginPage onLogin={() => logged_in()} />} />
+          <Route path="/browse-tickets" element={<BrowseTicketsPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
