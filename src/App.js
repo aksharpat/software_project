@@ -28,7 +28,6 @@ function App() {
           <ul>
             {loggedIn && <li><Link to="/home">Home</Link></li>}
             {loggedIn && <li><Link to="/profile">Profile</Link></li>}
-            {loggedIn && <li><Link to="/search">Search Tickets</Link></li>}
             {loggedIn && <li><Link to="/" onClick={logged_out}>Log Out</Link></li>}
           </ul>
         </nav>

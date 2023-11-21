@@ -11,6 +11,9 @@ const Homepage = () => {
             <Link to='/browse-tickets'>
                 <button>Go to Tickets</button>
             </Link>
+            <Link to='/search'>
+                <button>Search for Tickets</button>
+            </Link>
 
         </div>
     );
