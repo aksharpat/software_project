@@ -5,6 +5,7 @@ import LoginPage from './LoginPage';
 import BrowseTicketsPage from './BrowseTicketsPage';
 import RegistrationPage from './RegistrationPage';
 import ProfilePage from './ProfilePage';
+import SearchTicket from './SearchTickets';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -27,6 +28,7 @@ function App() {
           <ul>
             {loggedIn && <li><Link to="/home">Home</Link></li>}
             {loggedIn && <li><Link to="/profile">Profile</Link></li>}
+            {loggedIn && <li><Link to="/search">Search Tickets</Link></li>}
             {loggedIn && <li><Link to="/" onClick={logged_out}>Log Out</Link></li>}
           </ul>
         </nav>
@@ -36,6 +38,7 @@ function App() {
           <Route path="/" element={<LoginPage onLogin={logged_in} />} />
           <Route path="/browse-tickets" element={<BrowseTicketsPage />} />
           <Route path="/register" element={<RegistrationPage />} />
+          <Route path="/search" element={<SearchTicket />} />
           <Route path="/profile" element={<ProfilePage user={user} />} />
         </Routes>
       </div>
