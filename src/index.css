@@ -72,11 +72,13 @@ button:hover {
   text-align: center;
 }
 
-nav {
+.nav {
   background-color: #4a4a4a;
-  /* Background color of the navigation bar */
   padding: 10px;
-  /* Add some padding for better visibility */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Center items vertically */
 }
 
 ul {
@@ -87,7 +89,7 @@ ul {
 }
 
 li {
-  display: inline;
+  display: inline-block;
   margin-right: 20px;
   /* Add some space between navigation items */
 }
@@ -103,4 +105,8 @@ li a {
 li a:hover {
   text-decoration: underline;
   /* Underline the item on hover */
+}
+
+li.order-link {
+  justify-self: end;
 }

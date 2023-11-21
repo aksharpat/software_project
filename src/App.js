@@ -25,11 +25,11 @@ function App() {
   return (
     <Router>
       <div>
-        <nav>
+        <nav className='nav'>
           <ul>
             {loggedIn && <li><Link to="/home">Home</Link></li>}
             {loggedIn && <li><Link to="/profile">Profile</Link></li>}
-            {loggedIn && <li><Link to="/order">Order</Link></li>}
+            {loggedIn && <li className='order-link'><Link to="/order">Order</Link></li>}
             {loggedIn && <li><Link to="/" onClick={logged_out}>Log Out</Link></li>}
           </ul>
         </nav>
