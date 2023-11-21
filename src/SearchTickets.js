@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const SearchTicket = () => {
     const [ticketName, setTicketName] = useState('');
@@ -31,6 +32,9 @@ const SearchTicket = () => {
     return (
         <div className='search-ticket'>
             <h1>Search for a Specific Lottery Ticket</h1>
+            <Link to='/browse-tickets'>
+                <button>Go Back</button>
+            </Link>
             <div>
                 <label>Ticket Name:</label>
                 <input type="text" value={ticketName} onChange={handleInputChange} />
