@@ -48,6 +48,7 @@ function BrowseTicketsPage() {
                             {numbers.map((number, i) =>(
                                 <input key={i} type="number" min="1" max="50" value={number} onChange={(event) => handleNumberChange(i, event)}/>
                             ))}
+                            <button onClick={handleSubmit}>Submit Numbers</button>
                         </div>
                     )}
                     <button onClick={() => handleSelect(index)}>Select</button>
