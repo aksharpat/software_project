@@ -33,7 +33,7 @@ const SearchTicket = () => {
         <div className='search-ticket'>
             <h1>Search for a Specific Lottery Ticket</h1>
             <Link to='/browse-tickets'>
-                <button>Go Back</button>
+                <button>Browse Tickets</button>
             </Link>
             <div>
                 <label>Ticket Name:</label>
