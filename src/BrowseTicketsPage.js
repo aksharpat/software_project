@@ -25,12 +25,53 @@ function BrowseTicketsPage() {
     };
 
     const handleSubmit = () => {
+        const selectedTicketData = {
+            numbers : numbers,
+            winnings: lotteryTickets[selectedTicket].winnings,
+            cost: lotteryTickets[selectedTicket].cost,
+            drawDate: lotteryTickets[selectedTicket].drawDate,
+            winningNumbers: lotteryTickets[selectedTicket].winningNumbers
+        };
+
         setSubmittedNumbers({
             ...submittedNumbers, [lotteryTickets[selectedTicket].name]: numbers
         });
-        setNumbers(Array(5).fill(''));
 
-        localStorage.setItem(lotteryTickets[selectedTicket].name, JSON.stringify(numbers));
+        let existingTickets =
+            JSON.parse(localStorage.getItem(lotteryTickets[selectedTicket].name));
+
+        if (!Array.isArray(existingTickets)){
+            existingTickets = [];
+        }
+        existingTickets.push(selectedTicketData);
+
+        localStorage.setItem(lotteryTickets[selectedTicket].name, JSON.stringify(existingTickets));
+
+        setNumbers(Array(5).fill(''));
+    }
+
+    const handleRandom = () => {
+        const selectedTicketData = {
+            numbers : numbers,
+            winnings: lotteryTickets[selectedTicket].winnings,
+            cost: lotteryTickets[selectedTicket].cost,
+            drawDate: lotteryTickets[selectedTicket].drawDate,
+            winningNumbers: lotteryTickets[selectedTicket].winningNumbers
+        };
+
+        const randomNumbers = Array.from({length: 5}, () =>
+        Math.floor(Math.random() * 50)+1);
+        setNumbers(randomNumbers);
+
+        let existingTickets =
+            JSON.parse(localStorage.getItem(lotteryTickets[selectedTicket].name));
+
+        if (!Array.isArray(existingTickets)){
+            existingTickets = [];
+        }
+        existingTickets.push(selectedTicketData);
+
+        localStorage.setItem(lotteryTickets[selectedTicket].name, JSON.stringify(existingTickets));
     }
 
     return (
@@ -49,6 +90,7 @@ function BrowseTicketsPage() {
                                 <input key={i} type="number" min="1" max="50" value={number} onChange={(event) => handleNumberChange(i, event)}/>
                             ))}
                             <button onClick={handleSubmit}>Submit Numbers</button>
+                            <button onClick={handleRandom}>Random Submit</button>
                         </div>
                     )}
                     <button onClick={() => handleSelect(index)}>Select</button>
