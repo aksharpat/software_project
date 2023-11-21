@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 function BrowseTicketsPage() {
     const lotteryTickets = [
-        {name: 'Power Ball', cost: '$2', image: 'PowerBall.png'},
-        {name: 'Mega Millions', cost: '$2', image: 'MegaMillions.png'},
-        {name: 'Lotto Texas', cost: '$1', image: 'TexasLottery.png'},
-        {name: 'Texas Two Step', cost: '$1.50', image: 'TexasTwoStep.png'}
+        {name: 'Power Ball', cost: '$2', image: 'PowerBall.png', winnings: '5 million', drawDate: '12-31-2023', winningNumbers: '12 43 12 32 27'},
+        {name: 'Mega Millions', cost: '$2', image: 'MegaMillions.png', winnings: '4 million', drawDate: '12-30-2023', winningNumbers: '1 23 45 34 25'},
+        {name: 'Lotto Texas', cost: '$1', image: 'TexasLottery.png', winnings: '3 million', drawDate: '12-29-2023', winningNumbers: '5 15 25 35 45'},
+        {name: 'Texas Two Step', cost: '$1.50', image: 'TexasTwoStep.png', winnings: '2 million', drawDate: '12-28-2023', winningNumbers: '10 20 30 40 50'}
     ];
 
     const [selectedTicket, setSelectedTicket] = useState(null);
@@ -41,12 +41,16 @@ function BrowseTicketsPage() {
                     <img src={ticket.image} alt={ticket.name}/>
                     <h2>{ticket.name}</h2>
                     <p>Cost: {ticket.cost}</p>
-                    <p>Winnings: TBD</p>
+                    {selectedTicket === index && (
+                        <div>
+                            <p>Winnings: {ticket.winnings}</p>
+                            <p>Draw Date: {ticket.drawDate}</p>
+                            {numbers.map((number, i) =>(
+                                <input key={i} type="number" min="1" max="50" value={number} onChange={(event) => handleNumberChange(i, event)}/>
+                            ))}
+                        </div>
+                    )}
                     <button onClick={() => handleSelect(index)}>Select</button>
-                    {selectedTicket === index && numbers.map((number, i) =>(
-                        <input key={i} type="number" min="1" max="50" value={number} onChange={(event) => handleNumberChange(i, event)}/>
-                    ))}
-                    {selectedTicket === index && <button onClick={handleSubmit}>Submit</button> }
                 </div>
             ))}
             <Link to='/home'>
