@@ -25,7 +25,12 @@ function BrowseTicketsPage() {
     };
 
     const handleSubmit = () => {
+        if(selectedTicket === null){
+            alert('Please select a ticket first.');
+            return;
+        }
         const selectedTicketData = {
+            name: lotteryTickets[selectedTicket].name,
             numbers : numbers,
             winnings: lotteryTickets[selectedTicket].winnings,
             cost: lotteryTickets[selectedTicket].cost,
@@ -51,17 +56,22 @@ function BrowseTicketsPage() {
     }
 
     const handleRandom = () => {
+        if(selectedTicket === null){
+            alert('Please select a ticket first.');
+            return;
+        }
+        const randomNumbers = Array.from({length: 5}, () =>
+        Math.floor(Math.random() * 50)+1);
+        setNumbers(randomNumbers);
+
         const selectedTicketData = {
-            numbers : numbers,
+            name: lotteryTickets[selectedTicket].name,
+            numbers : randomNumbers,
             winnings: lotteryTickets[selectedTicket].winnings,
             cost: lotteryTickets[selectedTicket].cost,
             drawDate: lotteryTickets[selectedTicket].drawDate,
             winningNumbers: lotteryTickets[selectedTicket].winningNumbers
         };
-
-        const randomNumbers = Array.from({length: 5}, () =>
-        Math.floor(Math.random() * 50)+1);
-        setNumbers(randomNumbers);
 
         let existingTickets =
             JSON.parse(localStorage.getItem(lotteryTickets[selectedTicket].name));
