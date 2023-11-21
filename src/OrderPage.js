@@ -21,7 +21,7 @@ function OrderPage() {
                     <p>Cost: {ticket.cost}</p>
                     <p>Winnings: {ticket.winnings}</p>
                     <p>Draw Date: {ticket.drawDate}</p>
-                    <p>Your Numbers: {ticket.numbers.join(' ')}</p>
+                    <p>Your Numbers: {Array.isArray(ticket.numbers) ? ticket.numbers.join(' ') : 'No numbers'}</p>
                 </div>
             ))}
         </div>
