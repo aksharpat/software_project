@@ -7,6 +7,7 @@ import RegistrationPage from './RegistrationPage';
 import ProfilePage from './ProfilePage';
 import SearchTicket from './SearchTickets';
 import OrderPage from './OrderPage';
+import AdminPage from './AdminPage';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -14,7 +15,7 @@ function App() {
 
   function logged_in(userData) {
     setUser(userData);
-    console.log(userData)
+    console.log(userData.admin)
     setLoggedIn(true);
   }
   function logged_out() {
@@ -29,8 +30,10 @@ function App() {
           <ul>
             {loggedIn && <li><Link to="/home">Home</Link></li>}
             {loggedIn && <li><Link to="/profile">Profile</Link></li>}
+            {loggedIn && user?.admin === true && <li><Link to="/admin">Admin</Link></li>}
             {loggedIn && <li className='order-link'><Link to="/order">Order</Link></li>}
             {loggedIn && <li><Link to="/" onClick={logged_out}>Log Out</Link></li>}
+
           </ul>
         </nav>
         <Routes>
@@ -42,6 +45,9 @@ function App() {
           <Route path="/search" element={<SearchTicket />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/profile" element={<ProfilePage user={user} />} />
+          {loggedIn && user?.admin === true && (
+            <Route path="/admin" element={<AdminPage />} />
+          )}
         </Routes>
       </div>
     </Router>

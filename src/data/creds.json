@@ -4,20 +4,31 @@
         "username": "user1@example.com",
         "password": "password1",
         "homeAddress": "",
-        "phoneNumber": ""
+        "phoneNumber": "",
+        "admin": false
     },
     {
         "name": "User2",
         "username": "user2@example.com",
         "password": "password2",
         "homeAddress": "",
-        "phoneNumber": ""
+        "phoneNumber": "",
+        "admin": false
     },
     {
         "name": "test",
         "username": "test",
         "password": "test",
         "homeAddress": "test",
-        "phoneNumber": "test"
+        "phoneNumber": "test",
+        "admin": true
+    },
+    {
+        "name": "test2",
+        "username": "test2",
+        "password": "test2",
+        "homeAddress": "test2",
+        "phoneNumber": "test2",
+        "admin": false
     }
 ]
