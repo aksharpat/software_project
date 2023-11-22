@@ -1,11 +1,11 @@
 [
     {
         "name": "User1",
-        "username": "user1@example.com",
+        "username": "jonginter28@gmail.com",
         "password": "password1",
         "homeAddress": "",
         "phoneNumber": "",
-        "admin": false
+        "admin": true
     },
     {
         "name": "User2",
