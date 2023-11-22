@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 function BrowseTicketsPage() {
     const lotteryTickets = [
-        {name: 'Power Ball', cost: '$2', image: 'PowerBall.png', winnings: '5 million', drawDate: '12-31-2023', winningNumbers: '12 43 12 32 27'},
-        {name: 'Mega Millions', cost: '$2', image: 'MegaMillions.png', winnings: '4 million', drawDate: '12-30-2023', winningNumbers: '1 23 45 34 25'},
-        {name: 'Lotto Texas', cost: '$1', image: 'TexasLottery.png', winnings: '3 million', drawDate: '12-29-2023', winningNumbers: '5 15 25 35 45'},
-        {name: 'Texas Two Step', cost: '$1.50', image: 'TexasTwoStep.png', winnings: '2 million', drawDate: '12-28-2023', winningNumbers: '10 20 30 40 50'}
+        {name: 'Power Ball', cost: '$2', image: 'PowerBall.png', winnings: '5000000', drawDate: '12-31-2023', winningNumbers: '12 43 12 32 27'},
+        {name: 'Mega Millions', cost: '$2', image: 'MegaMillions.png', winnings: '4000000', drawDate: '12-30-2023', winningNumbers: '1 23 45 34 25'},
+        {name: 'Lotto Texas', cost: '$1', image: 'TexasLottery.png', winnings: '3000000', drawDate: '12-29-2023', winningNumbers: '5 15 25 35 45'},
+        {name: 'Texas Two Step', cost: '$1.50', image: 'TexasTwoStep.png', winnings: '2000000', drawDate: '12-28-2023', winningNumbers: '10 20 30 40 50'}
     ];
 
     const [selectedTicket, setSelectedTicket] = useState(null);
