@@ -45,7 +45,7 @@ function App() {
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/history" element={<OrderHistory />} />
           <Route path="/search" element={<SearchTicket />} />
-          <Route path="/order" element={<OrderPage />} />
+          <Route path="/order" element={<OrderPage userData={user} />} />
           <Route path="/profile" element={<ProfilePage user={user} />} />
           <Route path="/winning" element={<WinningNumbers user={user} />} />
           {loggedIn && user?.admin === true && (

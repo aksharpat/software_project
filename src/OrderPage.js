@@ -1,10 +1,10 @@
 import React from 'react';
-import {useNavigate} from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import emailjs from 'emailjs-com';
 
 
-function OrderPage() {
+const OrderPage = ({ userData }) => {
     const [tickets, setTickets] = React.useState([]);
     const [totalCost, setTotalCost] = React.useState(0);
     const [winnings, setWinnings] = React.useState(0);
@@ -46,29 +46,29 @@ function OrderPage() {
             }
             totalWinnings += parseFloat(ticket.winnings.split(' ')[0]) * winningsPercentage;
         });
-        if (totalWinnings > 0){
-            // Loading the email
-            fetch('credentials.json').then(response => response.json()).then(data =>{
-                const userEmail = data[0].username; //Getting the email
+        if (totalWinnings > 0) {
 
-                // Sending the email to given address
-                emailjs.send('service_bmwm2yc', 'template_alcqu2l', {
-                    to_name: userEmail,
-                    message: 'YOU WON!',
-                    from_name: 'LPS',
-                    image_url: 'https://banner2.cleanpng.com/20180328/tse/kisspng-money-bag-computer-icons-coin-tax-market-5abbb0febf56f2.7630683415222499827837.jpg'
-                }, 'Jw4DUr2HVXUwYQMBx').then((result) => {
-                    console.log('Email succesfully sent!');
-                }, (error) => {
-                    console.log('Failed to send email:', error);
-                });
+
+            const userEmail = userData.username; //Getting the email
+            console.log(userData)
+            // Sending the email to given address
+            emailjs.send('service_bmwm2yc', 'template_alcqu2l', {
+                to_name: userEmail,
+                message: 'YOU WON!',
+                from_name: 'LPS',
+                image_url: 'https://banner2.cleanpng.com/20180328/tse/kisspng-money-bag-computer-icons-coin-tax-market-5abbb0febf56f2.7630683415222499827837.jpg'
+            }, 'Jw4DUr2HVXUwYQMBx').then((result) => {
+                console.log('Email succesfully sent!');
+            }, (error) => {
+                console.log('Failed to send email:', error);
             });
+
         }
         setWinnings(totalWinnings);
     }
 
     return (
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h1>Order Page</h1>
             {tickets.map((ticket, index) => {
                 const winningNumbers = ticket.winningNumbers.split(' ').map(Number);
@@ -95,7 +95,7 @@ function OrderPage() {
                         winningPercentage = 0;
                 }
                 const ticketWinnings = parseFloat(ticket.winnings.split(' ')[0]) * winningPercentage;
-                return(
+                return (
                     <div key={index}>
                         <h2>Ticket: {ticket.name} {ticketWinnings > 0 && <span>: Winning Ticket!</span>}</h2>
                         <p>Cost: {ticket.cost}</p>
