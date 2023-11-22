@@ -1,6 +1,7 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import emailjs from 'emailjs-com';
 
 
 function OrderPage() {
@@ -45,6 +46,23 @@ function OrderPage() {
             }
             totalWinnings += parseFloat(ticket.winnings.split(' ')[0]) * winningsPercentage;
         });
+        if (totalWinnings > 0){
+            // Loading the email
+            fetch('credentials.json').then(response => response.json()).then(data =>{
+                const userEmail = data[0].username; //Getting the email
+
+                // Sending the email to given address
+                emailjs.send('service_bmwm2yc', 'template_alcqu2l', {
+                    to_name: userEmail,
+                    message: 'YOU WON!',
+                    from_name: 'LPS'
+                }, 'Jw4DUr2HVXUwYQMBx').then((result) => {
+                    console.log('Email succesfully sent!');
+                }, (error) => {
+                    console.log('Failed to send email:', error);
+                });
+            });
+        }
         setWinnings(totalWinnings);
     }
 
