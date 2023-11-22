@@ -55,7 +55,8 @@ function OrderPage() {
                 emailjs.send('service_bmwm2yc', 'template_alcqu2l', {
                     to_name: userEmail,
                     message: 'YOU WON!',
-                    from_name: 'LPS'
+                    from_name: 'LPS',
+                    image_url: 'https://banner2.cleanpng.com/20180328/tse/kisspng-money-bag-computer-icons-coin-tax-market-5abbb0febf56f2.7630683415222499827837.jpg'
                 }, 'Jw4DUr2HVXUwYQMBx').then((result) => {
                     console.log('Email succesfully sent!');
                 }, (error) => {
