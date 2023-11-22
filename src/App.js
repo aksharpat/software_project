@@ -8,6 +8,7 @@ import ProfilePage from './ProfilePage';
 import SearchTicket from './SearchTickets';
 import OrderPage from './OrderPage';
 import AdminPage from './AdminPage';
+import OrderHistory from './OrderHistory';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -38,10 +39,10 @@ function App() {
         </nav>
         <Routes>
           <Route path="/home" element={loggedIn ? <Homepage /> : <Navigate to="/" />} />
-          {/* Pass onLogin as a prop to LoginPage */}
           <Route path="/" element={<LoginPage onLogin={logged_in} />} />
           <Route path="/browse-tickets" element={<BrowseTicketsPage />} />
           <Route path="/register" element={<RegistrationPage />} />
+          <Route path="/history" element={<OrderHistory />} />
           <Route path="/search" element={<SearchTicket />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/profile" element={<ProfilePage user={user} />} />

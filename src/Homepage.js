@@ -14,6 +14,9 @@ const Homepage = () => {
             <Link to='/search'>
                 <button>Search for Tickets</button>
             </Link>
+            <Link to='/history'>
+                <button>Order History</button>
+            </Link>
 
         </div>
     );
