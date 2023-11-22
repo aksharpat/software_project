@@ -9,7 +9,7 @@ const WinningNumbers = ({ user }) => {
         setLotteryData(data);
         const filteredLotteryData = user.admin
             ? data // Display all data for admins
-            : data.filter(item => !item.previous); // Display only non-previous data for non-admins
+            : data.filter(item => item.previous); // Display only non-previous data for non-admins
 
         setLotteryData(filteredLotteryData);
         console.log(lotteryData)
