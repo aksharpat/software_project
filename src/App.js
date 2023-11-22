@@ -9,6 +9,7 @@ import SearchTicket from './SearchTickets';
 import OrderPage from './OrderPage';
 import AdminPage from './AdminPage';
 import OrderHistory from './OrderHistory';
+import WinningNumbers from './WinningNumbers';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -46,6 +47,7 @@ function App() {
           <Route path="/search" element={<SearchTicket />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/profile" element={<ProfilePage user={user} />} />
+          <Route path="/winning" element={<WinningNumbers user={user} />} />
           {loggedIn && user?.admin === true && (
             <Route path="/admin" element={<AdminPage />} />
           )}

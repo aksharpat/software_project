@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Power Ball",
+        "cost": "$2",
+        "image": "PowerBall.png",
+        "winnings": "5000000",
+        "drawDate": "12-31-2023",
+        "winningNumbers": "12 43 12 32 27",
+        "previous": false
+    },
+    {
+        "name": "Mega Millions",
+        "cost": "$2",
+        "image": "MegaMillions.png",
+        "winnings": "4000000",
+        "drawDate": "12-30-2023",
+        "winningNumbers": "1 23 45 34 25",
+        "previous": false
+    },
+    {
+        "name": "Texas Lottery",
+        "cost": "$1",
+        "image": "TexasLottery.png",
+        "winnings": "3000000",
+        "drawDate": "12-29-2023",
+        "winningNumbers": "5 15 25 35 45",
+        "previous": false
+    },
+    {
+        "name": "Texas Two Step",
+        "cost": "$1.50",
+        "image": "TexasTwoStep.png",
+        "winnings": "2000000",
+        "drawDate": "12-28-2023",
+        "winningNumbers": "10 20 30 40 50",
+        "previous": false
+    },
+    {
+        "name": "Power Ball",
+        "cost": "$2",
+        "image": "PowerBall.png",
+        "winnings": "5000000",
+        "drawDate": "12-21-2023",
+        "winningNumbers": "42 32 32 14 2",
+        "previous": true
+    },
+    {
+        "name": "Mega Millions",
+        "cost": "$2",
+        "image": "MegaMillions.png",
+        "winnings": "4000000",
+        "drawDate": "12-20-2023",
+        "winningNumbers": "12 32 22 13 13",
+        "previous": true
+    },
+    {
+        "name": "Texas Lottery",
+        "cost": "$1",
+        "image": "TexasLottery.png",
+        "winnings": "3000000",
+        "drawDate": "12-19-2023",
+        "winningNumbers": "4 12 2 43 33",
+        "previous": true
+    },
+    {
+        "name": "Texas Two Step",
+        "cost": "$1.50",
+        "image": "TexasTwoStep.png",
+        "winnings": "2000000",
+        "drawDate": "12-18-2023",
+        "winningNumbers": "35 49 16 6 9",
+        "previous": true
+    }
+]

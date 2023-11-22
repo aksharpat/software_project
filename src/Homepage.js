@@ -17,6 +17,9 @@ const Homepage = () => {
             <Link to='/history'>
                 <button>Order History</button>
             </Link>
+            <Link to='/winning'>
+                <button>Previous Winning Numbers</button>
+            </Link>
 
         </div>
     );

@@ -29,6 +29,20 @@ h2 {
   font-size: 20px;
 }
 
+p {
+  text-align: center;
+}
+
+.previous {
+  color: #000000;
+  font-weight: 600;
+}
+
+.current {
+  color: rgb(35, 190, 35);
+  font-weight: 600;
+}
+
 button {
   background-color: rgb(202, 87, 87);
   /* Set the background color */
