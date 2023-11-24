@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getTickets } from './api';
 
+
 function BrowseTicketsPage() {
     const lotteryTickets = getTickets()
 

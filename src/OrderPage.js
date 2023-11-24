@@ -3,7 +3,13 @@ import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import emailjs from 'emailjs-com';
 import axios from "axios";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
+const initialOptions = {
+    "client-id": "AfvwQTYUIPvDcqFQO-IV0SrWCPcK9SK0xgt6fOyn-q_wnv34MnZOnCiM-SidFFBDrnWTDW2czoCo4yvW",
+    currency: "USD",
+    intent: "capture",
+};
 
 const OrderPage = ({userData}) => {
     const [tickets, setTickets] = React.useState([]);
@@ -51,7 +57,6 @@ const OrderPage = ({userData}) => {
         });
         if (totalWinnings > 0) {
 
-
             const userEmail = userData.username; //Getting the email
             console.log(userData)
             // Sending the email to given address
@@ -69,7 +74,7 @@ const OrderPage = ({userData}) => {
         }
 
         // Calculating number of bought tickets
-        const ticketCount = tickets.reduce((counts,ticket) => {
+        const ticketCount = tickets.reduce((counts, ticket) => {
             if (!counts[ticket.name]) {
                 counts[ticket.name] = 1;
             } else {
@@ -91,7 +96,7 @@ const OrderPage = ({userData}) => {
             }
         };
 
-        for (const [ticketName, numTickets] of Object.entries(ticketCount)){
+        for (const [ticketName, numTickets] of Object.entries(ticketCount)) {
             await handleAddTicket(ticketName, numTickets);
         }
 
@@ -108,6 +113,7 @@ const OrderPage = ({userData}) => {
     }
 
     return (
+        <PayPalScriptProvider options={initialOptions}>
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <h1>Order Page</h1>
             {tickets.map((ticket, index) => {
@@ -149,7 +155,17 @@ const OrderPage = ({userData}) => {
             <p>Total Cost: ${totalCost.toFixed(2)}</p>
             {winnings > 0 && <p>You Won ${winnings.toFixed(2)}!</p>}
             <button onClick={handleOrder}>Order Now</button>
+            <PayPalButtons createOrder={(data, actions) => {
+                return actions.order.create({
+                    purchase_units: [{amount: {value: totalCost.toFixed(2),},},],});
+            }}
+           onApprove={(data, actions) => {
+               return actions.order.capture().then((details) => {
+                   console.log("Order approved: ", details);
+               });
+           }}/>
         </div>
+        </PayPalScriptProvider>
     );
 }
 
