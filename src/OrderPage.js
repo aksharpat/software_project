@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import emailjs from 'emailjs-com';
 import axios from "axios";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import {PayPalScriptProvider, PayPalButtons} from "@paypal/react-paypal-js";
 
 const initialOptions = {
     "client-id": "AfvwQTYUIPvDcqFQO-IV0SrWCPcK9SK0xgt6fOyn-q_wnv34MnZOnCiM-SidFFBDrnWTDW2czoCo4yvW",
@@ -31,6 +31,9 @@ const OrderPage = ({userData}) => {
         let totalWinnings = 0;
         tickets.forEach(ticket => {
             const winningNumbers = ticket.winningNumbers.split(' ').map(Number);
+            const randomNumber = Math.floor(Math.random() * 100) + 1;
+            const confirmationNumber = ticket.numbers.join('') + randomNumber;
+            console.log(`confirmation number for ticket ${confirmationNumber}`);
             const userNumbers = ticket.numbers.map(Number);
             let matches = 0;
             userNumbers.forEach(num => {
@@ -114,57 +117,59 @@ const OrderPage = ({userData}) => {
 
     return (
         <PayPalScriptProvider options={initialOptions}>
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <h1>Order Page</h1>
-            {tickets.map((ticket, index) => {
-                const winningNumbers = ticket.winningNumbers.split(' ').map(Number);
-                const userNumbers = ticket.numbers.map(Number);
-                let matches = 0;
-                userNumbers.forEach(num => {
-                    if (winningNumbers.includes(num)) matches++;
-                });
-                let winningPercentage;
-                switch (matches) {
-                    case 5:
-                        winningPercentage = 1;
-                        break;
-                    case 4:
-                        winningPercentage = 0.2;
-                        break;
-                    case 3:
-                        winningPercentage = 0.05;
-                        break;
-                    case 2:
-                        winningPercentage = 0.01;
-                        break;
-                    default:
-                        winningPercentage = 0;
-                }
-                const ticketWinnings = parseFloat(ticket.winnings.split(' ')[0]) * winningPercentage;
-                return (
-                    <div key={index}>
-                        <h2>Ticket: {ticket.name} {isDrawDate && isOrdered && ticketWinnings > 0 &&
-                            <span>: Winning Ticket!</span>}</h2>
-                        <p>Cost: {ticket.cost}</p>
-                        <p>Winnings: ${ticket.winnings}</p>
-                        <p>Draw Date: {ticket.drawDate}</p>
-                        <p>Your Numbers: {Array.isArray(ticket.numbers) ? ticket.numbers.join(' ') : 'No numbers'}</p>
-                    </div>
-                );
-            })}
-            <p>Total Cost: ${totalCost.toFixed(2)}</p>
-            {winnings > 0 && <p>You Won ${winnings.toFixed(2)}!</p>}
-            <button onClick={handleOrder}>Order Now</button>
-            <PayPalButtons createOrder={(data, actions) => {
-                return actions.order.create({
-                    purchase_units: [{amount: {value: totalCost.toFixed(2),},},],});
-            }}
-           onApprove={(data, actions) => {
-               return actions.order.capture().then((details) => {
-                   console.log("Order approved: ", details);
-               });
-           }}/>
-        </div>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <h1>Order Page</h1>
+                {tickets.map((ticket, index) => {
+                    const winningNumbers = ticket.winningNumbers.split(' ').map(Number);
+                    const userNumbers = ticket.numbers.map(Number);
+                    let matches = 0;
+                    userNumbers.forEach(num => {
+                        if (winningNumbers.includes(num)) matches++;
+                    });
+                    let winningPercentage;
+                    switch (matches) {
+                        case 5:
+                            winningPercentage = 1;
+                            break;
+                        case 4:
+                            winningPercentage = 0.2;
+                            break;
+                        case 3:
+                            winningPercentage = 0.05;
+                            break;
+                        case 2:
+                            winningPercentage = 0.01;
+                            break;
+                        default:
+                            winningPercentage = 0;
+                    }
+                    const ticketWinnings = parseFloat(ticket.winnings.split(' ')[0]) * winningPercentage;
+                    return (
+                        <div key={index}>
+                            <h2>Ticket: {ticket.name} {isDrawDate && isOrdered && ticketWinnings > 0 &&
+                                <span>: Winning Ticket!</span>}</h2>
+                            <p>Cost: {ticket.cost}</p>
+                            <p>Winnings: ${ticket.winnings}</p>
+                            <p>Draw Date: {ticket.drawDate}</p>
+                            <p>Your
+                                Numbers: {Array.isArray(ticket.numbers) ? ticket.numbers.join(' ') : 'No numbers'}</p>
+                        </div>
+                    );
+                })}
+                <p>Total Cost: ${totalCost.toFixed(2)}</p>
+                {winnings > 0 && <p>You Won ${winnings.toFixed(2)}!</p>}
+                <button onClick={handleOrder}>Order Now</button>
+                <PayPalButtons createOrder={(data, actions) => {
+                    return actions.order.create({
+                        purchase_units: [{amount: {value: totalCost.toFixed(2),},},],
+                    });
+                }}
+                               onApprove={(data, actions) => {
+                                   return actions.order.capture().then((details) => {
+                                       console.log("Order approved: ", details);
+                                   });
+                               }}/>
+            </div>
         </PayPalScriptProvider>
     );
 }
