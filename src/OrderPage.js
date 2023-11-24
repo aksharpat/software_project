@@ -8,6 +8,7 @@ const OrderPage = ({ userData }) => {
     const [tickets, setTickets] = React.useState([]);
     const [totalCost, setTotalCost] = React.useState(0);
     const [winnings, setWinnings] = React.useState(0);
+    const [isOrdered, setIsOrdered] = React.useState(false);
 
     React.useEffect(() => {
         const lotteryNames = ['Power Ball', 'Mega Millions', 'Lotto Texas', 'Texas Two Step'];
@@ -64,6 +65,7 @@ const OrderPage = ({ userData }) => {
             });
 
         }
+        setIsOrdered(true);
         setWinnings(totalWinnings);
     }
 
@@ -97,7 +99,7 @@ const OrderPage = ({ userData }) => {
                 const ticketWinnings = parseFloat(ticket.winnings.split(' ')[0]) * winningPercentage;
                 return (
                     <div key={index}>
-                        <h2>Ticket: {ticket.name} {ticketWinnings > 0 && <span>: Winning Ticket!</span>}</h2>
+                        <h2>Ticket: {ticket.name} {isOrdered && ticketWinnings > 0 && <span>: Winning Ticket!</span>}</h2>
                         <p>Cost: {ticket.cost}</p>
                         <p>Winnings: ${ticket.winnings}</p>
                         <p>Draw Date: {ticket.drawDate}</p>
