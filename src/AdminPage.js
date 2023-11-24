@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import salesData from './data/report.json'; // Adjust the path accordingly
 
 function AdminPage() {
-    const [report, setReport] = useState(null);
+    const [reportVisible, setReportVisible] = useState(false);
 
     const generateReport = () => {
         const totalRevenue = salesData.reduce((total, ticket) => {
@@ -17,18 +17,23 @@ function AdminPage() {
 
         generatedReport.push(<p key="total">Total Revenue: ${totalRevenue}</p>);
 
-        setReport(generatedReport);
+        return generatedReport;
+    };
+
+    const toggleReportVisibility = () => {
+        setReportVisible(!reportVisible);
     };
 
     return (
         <div className="admin-page">
             <h1>Admin Page</h1>
             <h2>Welcome, Admin!</h2>
-            <button onClick={generateReport}>Generate Report</button>
-            {report && (
-                <div>
+            <button onClick={toggleReportVisibility}>Generate Report</button>
+            {reportVisible && (
+                <div className="report-container">
                     <h3>Sales Report</h3>
-                    {report}
+                    {generateReport()}
+                    <button onClick={toggleReportVisibility}>Hide Report</button>
                 </div>
             )}
         </div>
