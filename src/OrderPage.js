@@ -2,6 +2,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import emailjs from 'emailjs-com';
+import axios from "axios";
 
 
 const OrderPage = ({userData}) => {
@@ -20,7 +21,7 @@ const OrderPage = ({userData}) => {
         setTotalCost(totalCost);
     }, []);
 
-    const handleOrder = () => {
+    const handleOrder = async () => {
         let totalWinnings = 0;
         tickets.forEach(ticket => {
             const winningNumbers = ticket.winningNumbers.split(' ').map(Number);
@@ -76,6 +77,23 @@ const OrderPage = ({userData}) => {
             }
             return counts;
         }, {});
+
+        const handleAddTicket = async (ticketName, numTickets) => {
+            try {
+                const response = await axios.post('http://localhost:3001/add-ticket', {
+                    ticketName,
+                    numTickets,
+                });
+
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error adding tickets:', error.message);
+            }
+        };
+
+        for (const [ticketName, numTickets] of Object.entries(ticketCount)){
+            await handleAddTicket(ticketName, numTickets);
+        }
 
         console.log(ticketCount);
 
