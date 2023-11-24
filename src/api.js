@@ -1,9 +1,12 @@
 import data from './data/creds.json';
 import numbers from './data/report.json'
+import tickets from './data/tickets.json'
 
 export const getUsers = () => data;
 
 export const getNumbers = () => numbers;
+
+export const getTickets = () => tickets;
 
 
 export const addUser = (newUser) => {

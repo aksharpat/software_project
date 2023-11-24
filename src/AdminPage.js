@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
-//import salesData from './data/report.json'; // Adjust the path accordingly
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getNumbers } from './api';
-
+import { getNumbers, getTickets } from './api';
 
 function AdminPage() {
     const [reportVisible, setReportVisible] = useState(false);
+    const [ticketsData, setTicketsData] = useState([]);
+    const [ticketsData2, setTicketsData2] = useState([]);
+    const [ticketUpdates, setTicketUpdates] = useState({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setTicketsData(getNumbers());
+            setTicketsData2(getTickets());
+        };
+
+        fetchData();
+    }, []);
 
     const generateReport = () => {
-        const salesData = getNumbers()
-        const totalRevenue = salesData.reduce((total, ticket) => {
+        const totalRevenue = ticketsData.reduce((total, ticket) => {
             return total + ticket.number_sold * ticket.ticket_price;
         }, 0);
 
-        const generatedReport = salesData.map(ticket => (
+        const generatedReport = ticketsData.map(ticket => (
             <div key={ticket.name}>
-                <p>{ticket.name}: {ticket.number_sold} tickets sold</p>
+                <p>{ticket.name}</p>
+                <p>Sold:{ticket.number_sold}</p>
+                <p>Cost:${ticket.ticket_price}</p>
             </div>
         ));
 
@@ -28,17 +39,35 @@ function AdminPage() {
         setReportVisible(!reportVisible);
     };
 
-    const handleAddTicket = async (ticketName, numTickets) => {
+    const handleUpdateTicket = async (name) => {
         try {
-            const response = await axios.post('http://localhost:3001/add-ticket', {
-                ticketName,
-                numTickets,
-            });
+            const updateData = ticketUpdates[name];
 
-            console.log(response.data);
+            if (updateData) {
+                const response = await axios.post('http://localhost:3001/update-ticket', {
+                    ticketName: name,
+                    newCost: updateData.newCost,
+                    newWinnings: updateData.newWinnings,
+                });
+
+                console.log(response.data);
+
+                setTicketsData(getNumbers());
+                setTicketsData2(getTickets());
+            }
         } catch (error) {
-            console.error('Error adding tickets:', error.message);
+            console.error('Error updating ticket:', error.message);
         }
+    };
+
+    const handleInputChange = (name, field, value) => {
+        setTicketUpdates(prevUpdates => ({
+            ...prevUpdates,
+            [name]: {
+                ...prevUpdates[name],
+                [field]: value,
+            },
+        }));
     };
 
     return (
@@ -54,6 +83,37 @@ function AdminPage() {
                     <button onClick={toggleReportVisibility}>Hide Report</button>
                 </div>
             )}
+            {/* Display all tickets and allow admin to update */}
+            <div>
+                <h3>All Tickets</h3>
+                {ticketsData2.map(ticket => (
+                    <div key={ticket.name}>
+                        <p>{ticket.name}</p>
+                        <p>Cost: {ticket.cost}</p>
+                        <p>Winnings: {ticket.winnings}</p>
+                        {/* Input fields for modifying cost and winnings */}
+                        <div>
+                            <label>New Cost: </label>
+                            <input
+                                type="text"
+                                value={ticketUpdates[ticket.name]?.newCost || ''}
+                                onChange={(e) => handleInputChange(ticket.name, 'newCost', e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <label>New Winnings: </label>
+                            <input
+                                type="text"
+                                value={ticketUpdates[ticket.name]?.newWinnings || ''}
+                                onChange={(e) => handleInputChange(ticket.name, 'newWinnings', e.target.value)}
+                            />
+                        </div>
+                        <button onClick={() => handleUpdateTicket(ticket.name)}>
+                            Update Ticket
+                        </button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

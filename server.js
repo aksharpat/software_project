@@ -8,7 +8,28 @@ app.use(cors())
 const PORT = 3001;
 
 app.use(bodyParser.json());
+app.get('/get-tickets', (req, res) => {
+    const salesData = JSON.parse(fs.readFileSync('./src/data/tickets.json', 'utf-8'));
+    res.json(salesData);
+});
 
+app.post('/update-ticket', (req, res) => {
+    const { ticketName, newCost, newWinnings } = req.body;
+    const salesData = JSON.parse(fs.readFileSync('./src/data/tickets.json', 'utf-8'));
+
+    // Update salesData JSON
+    const updatedSalesData = salesData.map(ticket => {
+        if (ticket.name === ticketName) {
+            return { ...ticket, cost: newCost, winnings: newWinnings };
+        }
+        return ticket;
+    });
+
+    // Save the updated data to the JSON file
+    fs.writeFileSync('./src/data/tickets.json', JSON.stringify(updatedSalesData, null, 2));
+
+    res.json({ success: true, message: 'Ticket updated successfully.' });
+});
 app.post('/add-ticket', (req, res) => {
     const { ticketName, numTickets } = req.body;
     const salesData = JSON.parse(fs.readFileSync('./src/data/report.json', 'utf-8'));
