@@ -1,14 +1,15 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import emailjs from 'emailjs-com';
 
 
-const OrderPage = ({ userData }) => {
+const OrderPage = ({userData}) => {
     const [tickets, setTickets] = React.useState([]);
     const [totalCost, setTotalCost] = React.useState(0);
     const [winnings, setWinnings] = React.useState(0);
     const [isOrdered, setIsOrdered] = React.useState(false);
+    const [isDrawDate, setIsDrawDate] = React.useState(false);
 
     React.useEffect(() => {
         const lotteryNames = ['Power Ball', 'Mega Millions', 'Lotto Texas', 'Texas Two Step'];
@@ -65,12 +66,31 @@ const OrderPage = ({ userData }) => {
             });
 
         }
+
+        // Calculating number of bought tickets
+        const ticketCount = tickets.reduce((counts,ticket) => {
+            if (!counts[ticket.name]) {
+                counts[ticket.name] = 1;
+            } else {
+                counts[ticket.name]++;
+            }
+            return counts;
+        }, {});
+
+        console.log(ticketCount);
+
+        // Calculating the current date
+        const today = new Date().toISOString().split('T')[0];
+        const hasDrawDate = tickets.some(ticket => ticket.drawDate === today);
+
+        setIsDrawDate(hasDrawDate);
+
         setIsOrdered(true);
         setWinnings(totalWinnings);
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <h1>Order Page</h1>
             {tickets.map((ticket, index) => {
                 const winningNumbers = ticket.winningNumbers.split(' ').map(Number);
@@ -99,7 +119,8 @@ const OrderPage = ({ userData }) => {
                 const ticketWinnings = parseFloat(ticket.winnings.split(' ')[0]) * winningPercentage;
                 return (
                     <div key={index}>
-                        <h2>Ticket: {ticket.name} {isOrdered && ticketWinnings > 0 && <span>: Winning Ticket!</span>}</h2>
+                        <h2>Ticket: {ticket.name} {isDrawDate && isOrdered && ticketWinnings > 0 &&
+                            <span>: Winning Ticket!</span>}</h2>
                         <p>Cost: {ticket.cost}</p>
                         <p>Winnings: ${ticket.winnings}</p>
                         <p>Draw Date: {ticket.drawDate}</p>
