@@ -36,6 +36,25 @@ app.post('/add-new-ticket', (req, res) => {
 
     res.json({ success: true, message: 'Ticket added successfully.' });
 });
+app.post('/add-history', (req, res) => {
+    const { Name, Cost, Winnings, Draw_Date, Your_Numbers, Winning_Numbers, Current, Confirmation } = req.body;
+
+    // Read existing data from the JSON file
+    const existingData = JSON.parse(fs.readFileSync('./src/data/history.json'));
+
+    // Create a new ticket object
+    const newTicket = {
+        Name, Cost, Winnings, Draw_Date, Your_Numbers, Winning_Numbers, Current, Confirmation,
+    };
+
+    // Add the new ticket to the existing data
+    existingData.push(newTicket);
+
+    // Write the updated data back to the JSON file
+    fs.writeFileSync('./src/data/history.json', JSON.stringify(existingData, null, 2));
+
+    res.json({ success: true, message: 'History added successfully.' });
+});
 app.post('/update-ticket', (req, res) => {
     const { ticketName, newCost, newWinnings } = req.body;
     const salesData = JSON.parse(fs.readFileSync('./src/data/tickets.json', 'utf-8'));

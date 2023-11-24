@@ -13,8 +13,8 @@ const OrderHistory = () => {
                     <p>Cost: {order.Cost}</p>
                     <p>Winnings: {order.Winnings}</p>
                     <p>Draw Date: {order.Draw_Date}</p>
-
-                    {order['Current?'] ? (
+                    <p>Confirmation: {order.Confirmation}</p>
+                    {order['Current'] ? (
                         <p>Your Numbers: {order.Your_Numbers}</p>
                     ) : (
                         <>

@@ -1,9 +1,9 @@
 import React from 'react';
-import {useNavigate} from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import emailjs from 'emailjs-com';
 import axios from "axios";
-import {PayPalScriptProvider, PayPalButtons} from "@paypal/react-paypal-js";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const initialOptions = {
     "client-id": "AfvwQTYUIPvDcqFQO-IV0SrWCPcK9SK0xgt6fOyn-q_wnv34MnZOnCiM-SidFFBDrnWTDW2czoCo4yvW",
@@ -11,7 +11,7 @@ const initialOptions = {
     intent: "capture",
 };
 
-const OrderPage = ({userData}) => {
+const OrderPage = ({ userData }) => {
     const [tickets, setTickets] = React.useState([]);
     const [totalCost, setTotalCost] = React.useState(0);
     const [winnings, setWinnings] = React.useState(0);
@@ -29,6 +29,15 @@ const OrderPage = ({userData}) => {
 
     const handleOrder = async () => {
         let totalWinnings = 0;
+        const addHistory = async (ticket) => {
+            try {
+                const response = await axios.post('http://localhost:3001/add-history', ticket);
+
+                console.log("test", response.data, ticket);
+            } catch (error) {
+                console.error('Error adding tickets:', error.message);
+            }
+        };
         tickets.forEach(ticket => {
             const winningNumbers = ticket.winningNumbers.split(' ').map(Number);
             const randomNumber = Math.floor(Math.random() * 100) + 1;
@@ -57,7 +66,12 @@ const OrderPage = ({userData}) => {
                     winningsPercentage = 0;
             }
             totalWinnings += parseFloat(ticket.winnings.split(' ')[0]) * winningsPercentage;
+            const test = { Name: ticket.name, Cost: ticket.cost, Winnings: ticket.winnings, Draw_Date: ticket.drawDate, Your_Numbers: ticket.numbers.join(' '), Winning_Numbers: ticket.winningNumbers, Current: true, Confirmation: confirmationNumber }
+            addHistory(test);
+
         });
+
+
         if (totalWinnings > 0) {
 
             const userEmail = userData.username; //Getting the email
@@ -117,7 +131,7 @@ const OrderPage = ({userData}) => {
 
     return (
         <PayPalScriptProvider options={initialOptions}>
-            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <h1>Order Page</h1>
                 {tickets.map((ticket, index) => {
                     const winningNumbers = ticket.winningNumbers.split(' ').map(Number);
@@ -161,14 +175,14 @@ const OrderPage = ({userData}) => {
                 <button onClick={handleOrder}>Order Now</button>
                 <PayPalButtons createOrder={(data, actions) => {
                     return actions.order.create({
-                        purchase_units: [{amount: {value: totalCost.toFixed(2),},},],
+                        purchase_units: [{ amount: { value: totalCost.toFixed(2), }, },],
                     });
                 }}
-                               onApprove={(data, actions) => {
-                                   return actions.order.capture().then((details) => {
-                                       console.log("Order approved: ", details);
-                                   });
-                               }}/>
+                    onApprove={(data, actions) => {
+                        return actions.order.capture().then((details) => {
+                            console.log("Order approved: ", details);
+                        });
+                    }} />
             </div>
         </PayPalScriptProvider>
     );
