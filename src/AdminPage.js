@@ -24,9 +24,7 @@ function AdminPage() {
 
         const generatedReport = ticketsData.map(ticket => (
             <div key={ticket.name}>
-                <p>{ticket.name}</p>
-                <p>Sold:{ticket.number_sold}</p>
-                <p>Cost:${ticket.ticket_price}</p>
+                <p>{ticket.name}: {ticket.number_sold} SOLD</p>
             </div>
         ));
 
