@@ -7,7 +7,14 @@ function AdminPage() {
     const [ticketsData, setTicketsData] = useState([]);
     const [ticketsData2, setTicketsData2] = useState([]);
     const [ticketUpdates, setTicketUpdates] = useState({});
-
+    const [newTicket, setNewTicket] = useState({
+        name: '',
+        cost: '',
+        image: '',
+        drawDate: '',
+        winningNumbers: '',
+        winnings: '',
+    });
     useEffect(() => {
         const fetchData = async () => {
             setTicketsData(getNumbers());
@@ -58,6 +65,15 @@ function AdminPage() {
         }
     };
 
+    const handleAddTicket = async () => {
+        try {
+            const response = await axios.post('http://localhost:3001/add-new-ticket', newTicket);
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error adding ticket:', error.message);
+        }
+    };
+
     const handleInputChange = (name, field, value) => {
         setTicketUpdates(prevUpdates => ({
             ...prevUpdates,
@@ -65,6 +81,15 @@ function AdminPage() {
                 ...prevUpdates[name],
                 [field]: value,
             },
+        }));
+    };
+
+    const handleInputChange2 = (e) => {
+        const { name, value } = e.target;
+        console.log(`Input changed - Name: ${name}, Value: ${value}`);
+        setNewTicket((prevTicket) => ({
+            ...prevTicket,
+            [name]: value,
         }));
     };
 
@@ -111,6 +136,22 @@ function AdminPage() {
                         </button>
                     </div>
                 ))}
+            </div>
+            <div>
+                <h3>Add New Ticket</h3>
+                <label>Name: </label>
+                <input type="text" name="name" value={newTicket.name} onChange={handleInputChange2} />
+                <label>Cost: </label>
+                <input type="text" name="cost" value={newTicket.cost} onChange={handleInputChange2} />
+                <label>Image: </label>
+                <input type="text" name="image" value={newTicket.image} onChange={handleInputChange2} />
+                <label>Draw Date: </label>
+                <input type="text" name="drawDate" value={newTicket.drawDate} onChange={handleInputChange2} />
+                <label>Winning Numbers: </label>
+                <input type="text" name="winningNumbers" value={newTicket.winningNumbers} onChange={handleInputChange2} />
+                <label>Winnings: </label>
+                <input type="text" name="winnings" value={newTicket.winnings} onChange={handleInputChange2} />
+                <button onClick={handleAddTicket}>Add Ticket</button>
             </div>
         </div>
     );

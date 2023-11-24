@@ -12,7 +12,30 @@ app.get('/get-tickets', (req, res) => {
     const salesData = JSON.parse(fs.readFileSync('./src/data/tickets.json', 'utf-8'));
     res.json(salesData);
 });
+app.post('/add-new-ticket', (req, res) => {
+    const { name, cost, image, drawDate, winningNumbers, winnings } = req.body;
 
+    // Read existing data from the JSON file
+    const existingData = JSON.parse(fs.readFileSync('./src/data/tickets.json'));
+
+    // Create a new ticket object
+    const newTicket = {
+        name,
+        cost,
+        image,
+        drawDate,
+        winningNumbers,
+        winnings,
+    };
+
+    // Add the new ticket to the existing data
+    existingData.push(newTicket);
+
+    // Write the updated data back to the JSON file
+    fs.writeFileSync('./src/data/tickets.json', JSON.stringify(existingData, null, 2));
+
+    res.json({ success: true, message: 'Ticket added successfully.' });
+});
 app.post('/update-ticket', (req, res) => {
     const { ticketName, newCost, newWinnings } = req.body;
     const salesData = JSON.parse(fs.readFileSync('./src/data/tickets.json', 'utf-8'));
