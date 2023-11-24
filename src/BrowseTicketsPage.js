@@ -1,14 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { getTickets } from './api';
 
 function BrowseTicketsPage() {
-    const lotteryTickets = [
-        {name: 'Power Ball', cost: '$2', image: 'PowerBall.png', winnings: '5000000', drawDate: '2023-12-31', winningNumbers: '12 43 12 32 27'},
-        {name: 'Mega Millions', cost: '$2', image: 'MegaMillions.png', winnings: '4000000', drawDate: '2023-12-30', winningNumbers: '1 23 45 34 25'},
-        {name: 'Lotto Texas', cost: '$1', image: 'TexasLottery.png', winnings: '3000000', drawDate: '2023-12-29', winningNumbers: '5 15 25 35 45'},
-        {name: 'Texas Two Step', cost: '$1.50', image: 'TexasTwoStep.png', winnings: '2000000', drawDate: '2023-11-24', winningNumbers: '10 20 30 40 50'}
-    ];
+    const lotteryTickets = getTickets()
 
     const [selectedTicket, setSelectedTicket] = useState(null);
     const [numbers, setNumbers] = useState(Array(5).fill(''));
@@ -25,13 +20,13 @@ function BrowseTicketsPage() {
     };
 
     const handleSubmit = () => {
-        if(selectedTicket === null){
+        if (selectedTicket === null) {
             alert('Please select a ticket first.');
             return;
         }
         const selectedTicketData = {
             name: lotteryTickets[selectedTicket].name,
-            numbers : numbers,
+            numbers: numbers,
             winnings: lotteryTickets[selectedTicket].winnings,
             cost: lotteryTickets[selectedTicket].cost,
             drawDate: lotteryTickets[selectedTicket].drawDate,
@@ -45,7 +40,7 @@ function BrowseTicketsPage() {
         let existingTickets =
             JSON.parse(localStorage.getItem(lotteryTickets[selectedTicket].name));
 
-        if (!Array.isArray(existingTickets)){
+        if (!Array.isArray(existingTickets)) {
             existingTickets = [];
         }
         existingTickets.push(selectedTicketData);
@@ -56,17 +51,17 @@ function BrowseTicketsPage() {
     }
 
     const handleRandom = () => {
-        if(selectedTicket === null){
+        if (selectedTicket === null) {
             alert('Please select a ticket first.');
             return;
         }
-        const randomNumbers = Array.from({length: 5}, () =>
-        Math.floor(Math.random() * 50)+1);
+        const randomNumbers = Array.from({ length: 5 }, () =>
+            Math.floor(Math.random() * 50) + 1);
         setNumbers(randomNumbers);
 
         const selectedTicketData = {
             name: lotteryTickets[selectedTicket].name,
-            numbers : randomNumbers,
+            numbers: randomNumbers,
             winnings: lotteryTickets[selectedTicket].winnings,
             cost: lotteryTickets[selectedTicket].cost,
             drawDate: lotteryTickets[selectedTicket].drawDate,
@@ -76,7 +71,7 @@ function BrowseTicketsPage() {
         let existingTickets =
             JSON.parse(localStorage.getItem(lotteryTickets[selectedTicket].name));
 
-        if (!Array.isArray(existingTickets)){
+        if (!Array.isArray(existingTickets)) {
             existingTickets = [];
         }
         existingTickets.push(selectedTicketData);
@@ -87,17 +82,17 @@ function BrowseTicketsPage() {
     return (
         <div className='browse-tickets-class'>
             <h1>Ticket Page</h1>
-            {lotteryTickets.map((ticket, index) =>(
+            {lotteryTickets.map((ticket, index) => (
                 <div key={index}>
-                    <img src={ticket.image} alt={ticket.name}/>
+                    <img src={ticket.image} alt={ticket.name} />
                     <h2>{ticket.name}</h2>
                     <p>Cost: {ticket.cost}</p>
                     {selectedTicket === index && (
                         <div>
                             <p>Winnings: {ticket.winnings}</p>
                             <p>Draw Date: {ticket.drawDate}</p>
-                            {numbers.map((number, i) =>(
-                                <input key={i} type="number" min="1" max="50" value={number} onChange={(event) => handleNumberChange(i, event)}/>
+                            {numbers.map((number, i) => (
+                                <input key={i} type="number" min="1" max="50" value={number} onChange={(event) => handleNumberChange(i, event)} />
                             ))}
                             <button onClick={handleSubmit}>Submit Numbers</button>
                             <button onClick={handleRandom}>Random Submit</button>
