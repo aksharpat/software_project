@@ -66,7 +66,7 @@ const OrderPage = ({ userData }) => {
                     winningsPercentage = 0;
             }
             totalWinnings += parseFloat(ticket.winnings.split(' ')[0]) * winningsPercentage;
-            const test = { Name: ticket.name, Cost: ticket.cost, Winnings: ticket.winnings, Draw_Date: ticket.drawDate, Your_Numbers: ticket.numbers.join(' '), Winning_Numbers: ticket.winningNumbers, Current: true, Confirmation: confirmationNumber }
+            const test = { Ticket: ticket.name, Cost: ticket.cost, Winnings: ticket.winnings, Draw_Date: ticket.drawDate, Your_Numbers: ticket.numbers.join(' '), Winning_Numbers: ticket.winningNumbers, Current: true, Confirmation: confirmationNumber }
             addHistory(test);
 
         });

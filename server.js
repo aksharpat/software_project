@@ -37,14 +37,14 @@ app.post('/add-new-ticket', (req, res) => {
     res.json({ success: true, message: 'Ticket added successfully.' });
 });
 app.post('/add-history', (req, res) => {
-    const { Name, Cost, Winnings, Draw_Date, Your_Numbers, Winning_Numbers, Current, Confirmation } = req.body;
+    const { Ticket, Cost, Winnings, Draw_Date, Your_Numbers, Winning_Numbers, Current, Confirmation } = req.body;
 
     // Read existing data from the JSON file
     const existingData = JSON.parse(fs.readFileSync('./src/data/history.json'));
 
     // Create a new ticket object
     const newTicket = {
-        Name, Cost, Winnings, Draw_Date, Your_Numbers, Winning_Numbers, Current, Confirmation,
+        Ticket, Cost, Winnings, Draw_Date, Your_Numbers, Winning_Numbers, Current, Confirmation,
     };
 
     // Add the new ticket to the existing data
