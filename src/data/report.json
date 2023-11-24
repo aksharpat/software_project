@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Power Ball",
+        "number_sold": 10,
+        "ticket_price": 2
+    },
+    {
+        "name": "Mega Millions",
+        "number_sold": 10,
+        "ticket_price": 2
+    },
+    {
+        "name": "Lotto Texas",
+        "number_sold": 10,
+        "ticket_price": 1
+    },
+    {
+        "name": "Texas Two Step",
+        "number_sold": 10,
+        "ticket_price": 1.5
+    }
+]
