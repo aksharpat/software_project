@@ -43,8 +43,8 @@ function App() {
           <Route path="/" element={<LoginPage onLogin={logged_in} />} />
           <Route path="/browse-tickets" element={<BrowseTicketsPage />} />
           <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/history" element={<OrderHistory />} />
           <Route path="/search" element={<SearchTicket />} />
+          <Route path="/history" element={<OrderHistory userData={user} />} />
           <Route path="/order" element={<OrderPage userData={user} />} />
           <Route path="/profile" element={<ProfilePage user={user} />} />
           <Route path="/winning" element={<WinningNumbers user={user} />} />
