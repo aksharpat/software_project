@@ -21,9 +21,16 @@ const OrderPage = ({ userData }) => {
     React.useEffect(() => {
         const lotteryNames = ['Power Ball', 'Mega Millions', 'Lotto Texas', 'Texas Two Step'];
         const allLotteryTickets = lotteryNames.map(name => JSON.parse(localStorage.getItem(name))).filter(Array.isArray).flat();
-        setTickets(allLotteryTickets);
+        const today = new Date();
+        today.setHours(0,0,0,0);
+        const updateTickets = allLotteryTickets.map(ticket => {
+            const drawDate = new Date(ticket.drawDate);
+            const isDrawDate = drawDate <= today;
+
+            return { ...ticket, isDrawDate };
+        })
         const totalCost = allLotteryTickets.reduce((total, ticket) => total + parseFloat(ticket.cost.slice(1)), 0);
-        setTickets(allLotteryTickets);
+        setTickets(updateTickets);
         setTotalCost(totalCost);
     }, []);
 
@@ -43,6 +50,7 @@ const OrderPage = ({ userData }) => {
             const randomNumber = Math.floor(Math.random() * 100) + 1;
             const confirmationNumber = ticket.numbers.join('') + randomNumber;
             console.log(`confirmation number for ticket ${confirmationNumber}`);
+            const isDrawDate = ticket.isDrawDate;
             const userNumbers = ticket.numbers.map(Number);
             let matches = 0;
             userNumbers.forEach(num => {
@@ -83,7 +91,7 @@ const OrderPage = ({ userData }) => {
                 from_name: 'LPS',
                 image_url: 'https://banner2.cleanpng.com/20180328/tse/kisspng-money-bag-computer-icons-coin-tax-market-5abbb0febf56f2.7630683415222499827837.jpg'
             }, 'Jw4DUr2HVXUwYQMBx').then((result) => {
-                console.log('Email succesfully sent!');
+                console.log('Email successfully sent!');
             }, (error) => {
                 console.log('Failed to send email:', error);
             });
@@ -158,9 +166,15 @@ const OrderPage = ({ userData }) => {
                             winningPercentage = 0;
                     }
                     const ticketWinnings = parseFloat(ticket.winnings.split(' ')[0]) * winningPercentage;
+
+                    console.log(`Ticket: ${ticket.name}`);
+                    console.log(`isDrawDate: ${isDrawDate}`);
+                    console.log(`isOrdered: ${isOrdered}`);
+                    console.log(`ticketWinnings: ${ticketWinnings}`);
+
                     return (
                         <div key={index}>
-                            <h2>Ticket: {ticket.name} {isDrawDate && isOrdered && ticketWinnings > 0 &&
+                            <h2>Ticket: {ticket.name} {ticket.isDrawDate && isOrdered && ticketWinnings > 0 &&
                                 <span>: Winning Ticket!</span>}</h2>
                             <p>Cost: {ticket.cost}</p>
                             <p>Winnings: ${ticket.winnings}</p>
@@ -174,8 +188,20 @@ const OrderPage = ({ userData }) => {
                 {winnings > 0 && <p>You Won ${winnings.toFixed(2)}!</p>}
                 <button onClick={handleOrder}>Order Now</button>
                 <PayPalButtons createOrder={(data, actions) => {
+                    if (totalCost <= 0) {
+                        console.error('Total cost must be greater than zero');
+                        return;
+                    }
+
                     return actions.order.create({
-                        purchase_units: [{ amount: { value: totalCost.toFixed(2), }, },],
+                        purchase_units: [{ amount: { value: totalCost.toFixed(2),
+                            breakdown: {
+                            item_total: {
+                                currency_code: 'USD',
+                                value: totalCost.toFixed(2)
+                            },
+
+                            }}, },],
                     });
                 }}
                     onApprove={(data, actions) => {

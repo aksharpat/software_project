@@ -9,6 +9,8 @@ function BrowseTicketsPage() {
     const [selectedTicket, setSelectedTicket] = useState(null);
     const [numbers, setNumbers] = useState(Array(5).fill(''));
     const [submittedNumbers, setSubmittedNumbers] = useState({});
+    const [counter, setCounter] = React.useState(0);
+
 
     const handleSelect = (index) => {
         setSelectedTicket(index);
@@ -25,6 +27,12 @@ function BrowseTicketsPage() {
             alert('Please select a ticket first.');
             return;
         }
+
+        if (counter >= 10) {
+            alert('You cannot add more tickets.');
+            return;
+        }
+
         const selectedTicketData = {
             name: lotteryTickets[selectedTicket].name,
             numbers: numbers,
@@ -49,6 +57,9 @@ function BrowseTicketsPage() {
         localStorage.setItem(lotteryTickets[selectedTicket].name, JSON.stringify(existingTickets));
 
         setNumbers(Array(5).fill(''));
+        setCounter(counter + 1);
+
+        console.log(`Counter: ${counter + 1}`);
     }
 
     const handleRandom = () => {
@@ -56,6 +67,12 @@ function BrowseTicketsPage() {
             alert('Please select a ticket first.');
             return;
         }
+
+        if (counter >= 10) {
+            alert('You cannot add more tickets.');
+            return;
+        }
+
         const randomNumbers = Array.from({ length: 5 }, () =>
             Math.floor(Math.random() * 50) + 1);
         setNumbers(randomNumbers);
@@ -78,6 +95,10 @@ function BrowseTicketsPage() {
         existingTickets.push(selectedTicketData);
 
         localStorage.setItem(lotteryTickets[selectedTicket].name, JSON.stringify(existingTickets));
+
+        setCounter(counter + 1);
+
+        console.log(`Counter: ${counter + 1}`);
     }
 
     return (
@@ -100,6 +121,7 @@ function BrowseTicketsPage() {
                         </div>
                     )}
                     <button onClick={() => handleSelect(index)}>Select</button>
+                    <button onClick={() => setCounter(0)}>Reset Counter</button>
                 </div>
             ))}
             <Link to='/home'>
