@@ -186,7 +186,6 @@ const OrderPage = ({ userData }) => {
                     );
                 })}
                 <p>Total Cost: ${totalCost.toFixed(2)}</p>
-
                 {winnings > 0 && <p>You Won ${winnings.toFixed(2)}!</p>}
                 <button onClick={handleOrder}>Order Now</button>
                 <PayPalButtons createOrder={(data, actions) => {

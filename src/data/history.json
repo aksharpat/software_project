@@ -468,5 +468,65 @@
     "Winning_Numbers": "12 43 12 32 27",
     "Current": true,
     "Confirmation": "301340271312"
+  },
+  {
+    "Ticket": "Power Ball",
+    "Cost": "$3",
+    "Winnings": "5000000",
+    "Draw_Date": "12/31/2023",
+    "Your_Numbers": "7 49 31 28 44",
+    "Winning_Numbers": "12 43 12 32 27",
+    "Current": true,
+    "Confirmation": "74931284445"
+  },
+  {
+    "Ticket": "Power Ball",
+    "Cost": "$3",
+    "Winnings": "5000000",
+    "Draw_Date": "12/31/2023",
+    "Your_Numbers": "22 28 42 15 40",
+    "Winning_Numbers": "12 43 12 32 27",
+    "Current": true,
+    "Confirmation": "222842154021"
+  },
+  {
+    "Ticket": "Power Ball",
+    "Cost": "$3",
+    "Winnings": "5000000",
+    "Draw_Date": "12/31/2023",
+    "Your_Numbers": "29 18 21 38 28",
+    "Winning_Numbers": "12 43 12 32 27",
+    "Current": true,
+    "Confirmation": "291821382823"
+  },
+  {
+    "Ticket": "Power Ball",
+    "Cost": "$3",
+    "Winnings": "5000000",
+    "Draw_Date": "12/31/2023",
+    "Your_Numbers": "17 38 34 38 42",
+    "Winning_Numbers": "12 43 12 32 27",
+    "Current": true,
+    "Confirmation": "173834384282"
+  },
+  {
+    "Ticket": "Power Ball",
+    "Cost": "$3",
+    "Winnings": "5000000",
+    "Draw_Date": "12/31/2023",
+    "Your_Numbers": "43 5 35 25 50",
+    "Winning_Numbers": "12 43 12 32 27",
+    "Current": true,
+    "Confirmation": "43535255011"
+  },
+  {
+    "Ticket": "Power Ball",
+    "Cost": "$3",
+    "Winnings": "5000000",
+    "Draw_Date": "12/31/2023",
+    "Your_Numbers": "30 13 40 27 13",
+    "Winning_Numbers": "12 43 12 32 27",
+    "Current": true,
+    "Confirmation": "30134027135"
   }
 ]
