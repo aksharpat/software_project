@@ -50,6 +50,16 @@ const OrderHistory = () => {
                                     <p>You won!</p>
                                     <p>Your Numbers: {order.Your_Numbers}</p>
                                     <p>Winning Numbers: {order.Winning_Numbers}</p>
+                                    {order.Winnings && order.Winnings.split('$')[1] < 599 && (
+                                        <button onClick={() => handleButtonClick('Depositing Winnings...')}>
+                                            Deposit Winnings
+                                        </button>
+                                    )}
+                                    {order.Winnings && order.Winnings.split('$')[1] >= 599 && (
+                                        <button onClick={() => handleButtonClick('Sending Email Confirmation...')}>
+                                            Send Email Confirmation
+                                        </button>
+                                    )}
                                 </>
                             ) : (
                                 <>
@@ -58,16 +68,6 @@ const OrderHistory = () => {
                                 </>
                             )}
                         </>
-                    )}
-                    {order.Winnings && order.Winnings.split('$')[1] < 599 && (
-                        <button onClick={() => handleButtonClick('Depositing Winnings...')}>
-                            Deposit Winnings
-                        </button>
-                    )}
-                    {order.Winnings && order.Winnings.split('$')[1] >= 599 && (
-                        <button onClick={() => handleButtonClick('Sending Email Confirmation...')}>
-                            Send Email Confirmation
-                        </button>
                     )}
                     {showMessage && (
                         <div>
