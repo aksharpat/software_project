@@ -74,6 +74,15 @@ function AdminPage() {
         }
     };
 
+    const handleDeleteTicket = async (ticketNameToDelete) => {
+        try {
+            const response = await axios.delete(`http://localhost:3001/delete-ticket/${ticketNameToDelete}`);
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error deleting ticket:', error.message);
+        }
+    };
+
     const handleInputChange = (name, field, value) => {
         setTicketUpdates(prevUpdates => ({
             ...prevUpdates,
@@ -133,6 +142,9 @@ function AdminPage() {
                         </div>
                         <button onClick={() => handleUpdateTicket(ticket.name)}>
                             Update Ticket
+                        </button>
+                        <button onClick={() => handleDeleteTicket(ticket.name)}>
+                            Delete Ticket
                         </button>
                     </div>
                 ))}

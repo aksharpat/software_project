@@ -72,6 +72,19 @@ app.post('/update-ticket', (req, res) => {
 
     res.json({ success: true, message: 'Ticket updated successfully.' });
 });
+
+app.delete('/delete-ticket/:ticketName', (req, res) => {
+    const ticketNameToDelete = req.params.ticketName;
+    const salesData = JSON.parse(fs.readFileSync('./src/data/tickets.json', 'utf-8'));
+
+    // Filter out the ticket to be deleted
+    const updatedSalesData = salesData.filter(ticket => ticket.name !== ticketNameToDelete);
+
+    // Save the updated data to the JSON file
+    fs.writeFileSync('./src/data/tickets.json', JSON.stringify(updatedSalesData, null, 2));
+
+    res.json({ success: true, message: 'Ticket deleted successfully.' });
+});
 app.post('/add-ticket', (req, res) => {
     const { ticketName, numTickets } = req.body;
     const salesData = JSON.parse(fs.readFileSync('./src/data/report.json', 'utf-8'));
