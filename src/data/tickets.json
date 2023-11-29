@@ -1,7 +1,7 @@
 [
     {
         "name": "Power Ball",
-        "cost": "$3",
+        "cost": "$2",
         "image": "PowerBall.png",
         "drawDate": "12-31-2023",
         "winningNumbers": "12 43 12 32 27",
@@ -16,7 +16,7 @@
         "winningNumbers": "1 23 45 34 25"
     },
     {
-        "name": "Texas Lottery",
+        "name": "Lotto Texas",
         "cost": "$1",
         "image": "TexasLottery.png",
         "winnings": "3000000",

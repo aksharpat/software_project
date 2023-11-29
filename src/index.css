@@ -43,6 +43,10 @@ p {
   font-weight: 600;
 }
 
+.history-page {
+  text-align: center;
+}
+
 button {
   background-color: rgb(202, 87, 87);
   /* Set the background color */

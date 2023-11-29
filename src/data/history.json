@@ -1,32 +1,102 @@
 [
-  {
-    "Ticket": "Lotto Texas",
-    "Cost": "$1.50",
-    "Winnings": "$2000000",
-    "Draw_Date": "11-28-2023",
-    "Your_Numbers": "17 10 36 42 50",
-    "Winning_Numbers": "16 24 50 32 43",
-    "Current": false,
-    "Confirmation": "436030713527"
-  },
-  {
-    "Ticket": "Power Ball",
-    "Cost": "$2",
-    "Winnings": "$5000000",
-    "Draw_Date": "11-28-2023",
-    "Your_Numbers": "42 13 49 22 13",
-    "Winning_Numbers": "42 13 49 22 13",
-    "Current": false,
-    "Confirmation": "862030474513"
-  },
-  {
-    "Ticket": "Texas Two Step",
-    "Cost": "$1.50",
-    "Winnings": "2000000",
-    "Draw_Date": "12-28-2023",
-    "Your_Numbers": "10 20 30 40 50",
-    "Winning_Numbers": "10 20 30 40 50",
-    "Current": true,
-    "Confirmation": "102030405016"
-  }
+    {
+        "Ticket": "Lotto Texas",
+        "Cost": "$1.50",
+        "Winnings": "$2000000",
+        "Draw_Date": "11-28-2023",
+        "Your_Numbers": "17 10 36 42 50",
+        "Winning_Numbers": "16 24 50 32 43",
+        "Current": false,
+        "Confirmation": "436030713527"
+    },
+    {
+        "Ticket": "Power Ball",
+        "Cost": "$2",
+        "Winnings": "$5000000",
+        "Draw_Date": "11-28-2023",
+        "Your_Numbers": "42 13 49 22 13",
+        "Winning_Numbers": "42 13 49 22 13",
+        "Current": false,
+        "Confirmation": "862030474513"
+    },
+    {
+        "Ticket": "Power Ball",
+        "Cost": "$2",
+        "Winnings": "$100",
+        "Draw_Date": "11-28-2023",
+        "Your_Numbers": "12 45 35 12 12",
+        "Winning_Numbers": "12 45 35 12 12",
+        "Current": false,
+        "Confirmation": "869030474513"
+    },
+    {
+        "Ticket": "Texas Two Step",
+        "Cost": "$1.50",
+        "Winnings": "2000000",
+        "Draw_Date": "12-28-2023",
+        "Your_Numbers": "10 20 30 40 50",
+        "Winning_Numbers": "10 20 30 40 50",
+        "Current": true,
+        "Confirmation": "102030405016"
+    },
+    {
+        "Ticket": "Texas Two Step",
+        "Cost": "$1.50",
+        "Winnings": "2000000",
+        "Draw_Date": "12-28-2023",
+        "Your_Numbers": "10 20 30 40 50",
+        "Winning_Numbers": "10 20 30 40 50",
+        "Current": true,
+        "Confirmation": "102030405068"
+    },
+    {
+        "Ticket": "Texas Two Step",
+        "Cost": "$1.50",
+        "Winnings": "2000000",
+        "Draw_Date": "12-28-2023",
+        "Your_Numbers": "10 20 30 40 50",
+        "Winning_Numbers": "10 20 30 40 50",
+        "Current": true,
+        "Confirmation": "10203040502"
+    },
+    {
+        "Ticket": "Power Ball",
+        "Cost": "$2",
+        "Winnings": "5000000",
+        "Draw_Date": "12-31-2023",
+        "Your_Numbers": "43 3 40 42 29",
+        "Winning_Numbers": "12 43 12 32 27",
+        "Current": true,
+        "Confirmation": "43340422919"
+    },
+    {
+        "Ticket": "Texas Two Step",
+        "Cost": "$1.50",
+        "Winnings": "2000000",
+        "Draw_Date": "12-28-2023",
+        "Your_Numbers": "10 20 30 40 50",
+        "Winning_Numbers": "10 20 30 40 50",
+        "Current": true,
+        "Confirmation": "102030405055"
+    },
+    {
+        "Ticket": "Power Ball",
+        "Cost": "$2",
+        "Winnings": "5000000",
+        "Draw_Date": "12-31-2023",
+        "Your_Numbers": "43 3 40 42 29",
+        "Winning_Numbers": "12 43 12 32 27",
+        "Current": true,
+        "Confirmation": "43340422971"
+    },
+    {
+        "Ticket": "Texas Two Step",
+        "Cost": "$1.50",
+        "Winnings": "2000000",
+        "Draw_Date": "12-28-2023",
+        "Your_Numbers": "10 20 30 40 50",
+        "Winning_Numbers": "10 20 30 40 50",
+        "Current": true,
+        "Confirmation": "102030405050"
+    }
 ]

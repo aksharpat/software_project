@@ -1,10 +1,10 @@
 [
     {
-        "name": "User1",
+        "name": "Jon Ginter",
         "username": "jonginter28@gmail.com",
-        "password": "password1",
-        "homeAddress": "",
-        "phoneNumber": "",
+        "password": "password",
+        "homeAddress": "9604 Kewanee Ave",
+        "phoneNumber": "8068847659",
         "admin": true
     },
     {
@@ -30,5 +30,13 @@
         "homeAddress": "test2",
         "phoneNumber": "test2",
         "admin": false
+    },
+    {
+        "name": "ak",
+        "username": "aksharpat23@gmail.com",
+        "password": "ak",
+        "homeAddress": "4468 85th St",
+        "phoneNumber": "8064359633",
+        "admin": true
     }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "name": "Power Ball",
-    "number_sold": 23,
+    "number_sold": 25,
     "ticket_price": 2
   },
   {
@@ -16,7 +16,7 @@
   },
   {
     "name": "Texas Two Step",
-    "number_sold": 41,
+    "number_sold": 46,
     "ticket_price": 1.5
   }
 ]
