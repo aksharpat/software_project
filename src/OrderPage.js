@@ -171,6 +171,7 @@ const OrderPage = ({ userData }) => {
                     console.log(`isDrawDate: ${isDrawDate}`);
                     console.log(`isOrdered: ${isOrdered}`);
                     console.log(`ticketWinnings: ${ticketWinnings}`);
+                    console.log(`total cost: ${totalCost}`);
 
                     return (
                         <div key={index}>
@@ -185,6 +186,7 @@ const OrderPage = ({ userData }) => {
                     );
                 })}
                 <p>Total Cost: ${totalCost.toFixed(2)}</p>
+
                 {winnings > 0 && <p>You Won ${winnings.toFixed(2)}!</p>}
                 <button onClick={handleOrder}>Order Now</button>
                 <PayPalButtons createOrder={(data, actions) => {
