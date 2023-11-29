@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { getHistory } from './api';
+import emailjs from 'emailjs-com';
 
-const OrderHistory = () => {
+const OrderHistory = ({ userData }) => {
 
     const orderHistoryData = getHistory()
 
@@ -11,15 +12,6 @@ const OrderHistory = () => {
     const [showMessage2, setShowMessage2] = useState(false);
     const [messageText2, setMessageText2] = useState('');
 
-    const handleDepositWinnings = (order) => {
-        // Handle deposit winnings logic
-        console.log(`Deposit winnings for order: ${order.Confirmation}`);
-    };
-
-    const handleSendEmailConfirmation = (order) => {
-        // Handle send email confirmation logic
-        console.log(`Send email confirmation for order: ${order.Confirmation}`);
-    };
 
     const handleButtonClick = (message) => {
         // Set the message to be displayed
@@ -34,6 +26,10 @@ const OrderHistory = () => {
         }, 1500);
     };
 
+    const email = () => {
+
+    }
+
     const handleButtonClick2 = (message) => {
         // Set the message to be displayed
         setMessageText2(message);
@@ -45,6 +41,19 @@ const OrderHistory = () => {
         setTimeout(() => {
             setShowMessage2(false);
         }, 1500);
+        const userEmail = userData.username; //Getting the email
+        console.log(userData)
+        // Sending the email to given address
+        emailjs.send('service_bmwm2yc', 'template_alcqu2l', {
+            to_name: userEmail,
+            message: 'YOU WON!-confirmation email',
+            from_name: 'LPS',
+            image_url: 'https://banner2.cleanpng.com/20180328/tse/kisspng-money-bag-computer-icons-coin-tax-market-5abbb0febf56f2.7630683415222499827837.jpg'
+        }, 'Jw4DUr2HVXUwYQMBx').then((result) => {
+            console.log('Email succesfully sent!');
+        }, (error) => {
+            console.log('Failed to send email:', error);
+        });
     };
 
     return (
